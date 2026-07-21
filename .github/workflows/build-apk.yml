@@ -1,4 +1,4 @@
-name: Build Piggy Pals Play Bundle
+name: Build Signed Piggy Pals Bundle
 
 on:
   workflow_dispatch:
@@ -24,11 +24,20 @@ jobs:
         with:
           gradle-version: "8.9"
 
-      - name: Build release bundle
+      - name: Restore signing key
+        run: |
+          echo "${{ secrets.SIGNING_KEY }}" | base64 --decode > "$RUNNER_TEMP/piggy-pals-upload-key.jks"
+
+      - name: Build signed release bundle
+        env:
+          KEYSTORE_FILE: ${{ runner.temp }}/piggy-pals-upload-key.jks
+          KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         run: gradle bundleRelease
 
-      - name: Upload Play Store bundle
+      - name: Upload signed Play Store bundle
         uses: actions/upload-artifact@v4
         with:
-          name: piggy-pals-play-bundle
+          name: piggy-pals-signed-play-bundle
           path: app/build/outputs/bundle/release/app-release.aab
