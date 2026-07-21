@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.cakesportal.piggyroadtrip'
+    namespace 'com.darkbyte.piggypals'
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.cakesportal.piggyroadtrip"
+        applicationId "com.darkbyte.piggypals"
         minSdk 23
         targetSdk 35
         versionCode 2
