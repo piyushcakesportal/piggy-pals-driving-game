@@ -24,7 +24,7 @@ jobs:
         with:
           gradle-version: "8.9"
 
-      - name: Build release app bundle
+      - name: Build release bundle
         run: gradle bundleRelease
 
       - name: Upload Play Store bundle
