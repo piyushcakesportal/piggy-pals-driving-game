@@ -1,4 +1,4 @@
-package com.cakesportal.piggyroadtrip;
+package com.darkbyte.piggypals;
 
 import android.app.Activity;
 import android.content.Context;
